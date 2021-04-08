@@ -1,33 +1,35 @@
-import React, {Component} from 'react';
+import React from 'react';
 
-//AppがComponentを継承している 
-// class App extends Component {
-//   render() {
-//     return (
-//       <React.Fragment>
-//         <label htmlFor="label">label</label>
-//         <input type="text" onChange={() => {console.log("tired")}} />
-//       </React.Fragment>
-//     )
-//   }
-// }
-
-// 関数コンポーネント
 const App = () => {
+  const profiles = [
+    {
+      name: "Taro",
+      age: 10
+    },
+    {
+      name: "Natsu",
+      age: 9
+    },
+    {
+      name: "NoAge"
+    }
+  ]
   return (
-  <div>
-    <Dog />
-    <Cat />
-  </div>)
+    <div>
+      {
+        profiles.map((profiles, index) => {
+          console.log(profiles)
+          return <User name={profiles.name} age={profiles.age} key={index} />
+        })
+      }
+    </div>)
 }
 
-const Dog = () => {
-  return <div>Bow!</div>
+const User = (props) => {
+  console.log(props)
+  return <div>Bow! {props.name} He's {props.age}</div>
 }
 
-const Cat = () => {
-  return <div>Meow!</div>
-}
 
 // export default App
 
@@ -40,5 +42,10 @@ const Cat = () => {
 //     )
 //   }
 // }
+
+// デフォルトの値を用意しておける。
+User.defaultProps = {
+  age: 1,
+}
 
 export default App;
