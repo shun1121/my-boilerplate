@@ -7,10 +7,13 @@ import { Link } from 'react-router-dom'
 
 class EventsIndex extends Component {
   componentDidMount() {
+    // propsはどこから持って来とる？ 15行目
     this.props.readEvents()
   }
 
   renderEvents() {
+    // ↓ reducerのevents.jsから来たオブジェクトを表示しとると思うけどreducersをimportしていない。なぜ？
+    console.log(this.props.events)
     return _.map(this.props.events, event => (
       <tr key={event.id}>
         <td>{event.id}</td>
