@@ -1,4 +1,4 @@
-import { READ_EVENTS } from '../actions'
+import { READ_EVENTS, DELETE_EVENT } from '../actions'
 import _ from 'lodash'
 
 export default (events = {}, action) => {
@@ -9,6 +9,11 @@ export default (events = {}, action) => {
       // {1: {…}, 2: {…}, 3: {…}, 5: {…}, 6: {…}, 7: {…}, 8: {…}, 9: {…}, 10: {…}}
       // ↑ 各要素のオブジェクトのidのvalueをキーにしている。
       return _.mapKeys(action.response.data, 'id')
+    case DELETE_EVENT:
+      // ↓ eventsというオブジェクトから、あるidのデータを削除
+      delete events[action.id]
+      // ↓ こう書くことでアップデートされた後のeventsオブジェクトを返す。
+      return { ...events }
     default:
       return events
   }
